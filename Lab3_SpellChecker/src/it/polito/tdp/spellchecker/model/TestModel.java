@@ -21,6 +21,9 @@ public class TestModel {
 		parole.add("abgfjf");		
 		
 		System.out.println(d.spellCheckText(parole));
+		
+		System.out.println(d.getParoleSbagliate());
+		System.out.println(""+ d.getNumParoleSbagliate());
 
 	}
 

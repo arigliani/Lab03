@@ -70,6 +70,8 @@ public class Dyctionary {
 		parola.trim();
 		parola.replaceAll("[ \\p{Punct}]", "");
 		for(String d: set){
+			d.trim();
+			d.replaceAll("[ \\p{Punct}]", "");
 			if(parola.equals(d)){
 				RichWord temp= new RichWord(parola,true);
 				controllate.add(temp);
