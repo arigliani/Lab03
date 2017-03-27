@@ -1,9 +1,8 @@
 package it.polito.tdp.spellchecker.controller;
-    // le parole senza sapazi dopo me le da come giuste
-    // funziona stra male
+   
+    
 import java.io.IOException;
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -18,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 public class SpellCheckerController {
-//	ObservableList<String> opzioni=FXCollections.observableArrayList("Italian", "English");
+	
 	Dyctionary dyctionary;
 
     @FXML
@@ -59,7 +58,8 @@ public class SpellCheckerController {
     	txttime.setText("");
     	txtError.setText("");
     	txtWrong.setText("");
-    	
+    	dyctionary.inizializza();
+    
     	
 
     }
@@ -68,7 +68,9 @@ public class SpellCheckerController {
     void initialize(MouseEvent event) throws IOException {
     	String parola= btnScelta.getValue();
     	dyctionary.loadDictionary(parola);   
-    	txtWrong.setText(" preso dizionarioio" +parola);
+    	txtWrong.setText(" preso dizionarioio " +parola);
+    	
+    	
     	
 
     }
@@ -76,7 +78,7 @@ public class SpellCheckerController {
     @FXML
     void doSpellCheck(ActionEvent event) {
     	long c=System.nanoTime();
-    	List<String> passare=this.prendiTesto(txtInput);
+    	List<String> passare=dyctionary.prendiTesto(txtInput.getText());
     	dyctionary.spellCheckText(passare);
     	txtInput.clear();
     	
@@ -90,22 +92,7 @@ public class SpellCheckerController {
     
     
 
-    public List<String> prendiTesto(TextField txt) {
-    	String t=txt.getText();
-    	String parola ="";
-    	List<String> elenco = new LinkedList<String>();
-    	for( int i=0; i<t.length();i++){
-    		if(t.charAt(i)==' '){
-    			elenco.add(parola.trim().replaceAll("[ \\p{Punct}]", ""));
-    			parola="";
-    		}
-    		else{
-    			parola= parola+t.charAt(i);
-    		}
-    	}
-		return elenco;
-		
-	}
+  
 
 	/**
 	 * @return the dyctionary

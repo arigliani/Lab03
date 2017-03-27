@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+
 public class Dyctionary {
 	//private List<String> set= new LinkedList<String>();
 	private HashSet<String> set =new HashSet<String>();
@@ -86,6 +87,7 @@ public class Dyctionary {
 	
 	public String getParoleSbagliate(){
 		String elenco="";
+		
 		for(RichWord c: controllate){
 			if(c.isCorretto()==false){
 				elenco= elenco+c.getParola()+"\n";
@@ -104,5 +106,51 @@ public class Dyctionary {
 		return cont;
 	    
 	}
+	
+	public boolean inizializza(){
+		this.set.clear();
+		this.controllate.clear();
+		return true;
+		
+	}
+
+	public List<String> prendiTesto(String t) {
+    	List<String> elenco = new LinkedList<String>();
+    	if(!t.contains(" ")){
+    		elenco.add(t.trim().replaceAll("[ \\p{Punct}]", ""));
+    		return elenco;
+    	}  
+    	else{
+    		return elenco=this.molteParole(t);
+    	}
+    	
+    	
+		
+	}
+
+	private List<String> molteParole(String t) {
+		List<String> elenco = new LinkedList<String>();
+		String parola="";
+		for(int i=0;i<t.length();i++){
+			if(t.charAt(i)==' '){
+		       elenco.add(parola.trim().replaceAll("[ \\p{Punct}]", ""));
+		       parola="";
+			}
+			else{
+				if((i==t.length()-1)&&(t.charAt(i)!=' ')){
+					parola=parola+t.charAt(i);
+					 elenco.add(parola.trim().replaceAll("[ \\p{Punct}]", ""));
+				       parola="";}
+				else
+				parola=parola+t.charAt(i);
+			}
+			
+				
+			
+		}
+		return elenco;
+	}
+
+	
 	
 	}
